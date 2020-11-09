@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ShopingCart = require("../models/ShopingCart");
-const Cart=require("../models/Cards");
+const Cart=require("../models/Carts");
 
 //var arr=[];
 
@@ -14,49 +14,21 @@ router.get("/getData/:id", (req, res) => {
   ShopingCart.findByPk(req.params.id).then((result) => res.json(result));
 });
 
-router.get("/addtocart/:id",async(req,res)=>{
+router.post("/addtocart/:id",async(req,res)=>{
       var Product_id=req.params.id;
-      const result= await ShopingCart.findByPk(Product_id);
-      //console.log(result);
-    //  const result= await ShopingCart.findByPk(Product_id);
-    //   //res.json(result);
-    //   //console.log(result)
-    //   console.log(arr.length);
-    //   var arr=[];
-    //   if(arr.length==0){
-    //     arr.push(Product_id)
-    //     var cart=new Cart({})
-    //     var newCart=cart.add(result,Product_id);
-    //     console.log("1st time",newCart);
-    //   }
-    //   else if((arr.length!=0)){
-    //     for(let i=0;i<arr.length;i++){
-    //       console.log(Product_id);
-    //       if(arr[i]===Product_id){
-    //         var cart=new Cart(newCart);
-    //         console.log("inside cart",cart)
-    //         var newCart=cart.add(result,Product_id);
-    //         console.log("2nd time",newCart);
-    //       }
-    //       else{
-    //         arr.push(Product_id)
-    //         var cart=new Cart({})
-    //         var newCart=cart.add(result,Product_id);
-    //         console.log("3rd time",newCart);
-    //       }
-    //     }
-    //   }
-    var cart=new Cart({})
-     var newCart=cart.add(result,Product_id);
-      //console.log(">>>>>>>>>>>>>>new value",newCart);
-      res.json(newCart);
-    //console.log(cart.add(result,result.id));
-      //ShopingCart.findByPk(req.params.id).then((result) => res.json(result));
+      const user = await ShopingCart.findAll({
+        where: {
+          id: Product_id,
+        },
+      })
+      Cart.save(user[0].dataValues);
+      res.json(Cart.getCart());
 }); 
 
-router.post("/savecart",(req,res)=>{
-  res.json(req.body);
-})
+// router.get("/getCart",(req,res)=>{
+//   const newCart=Cart.getCart();
+//   console.log("asas",newCart);
+// })
 
 router.post("/adddata", (req, res) => {
   //console.log(req.body);
