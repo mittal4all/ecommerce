@@ -2,7 +2,7 @@ let cart = null;
 
 module.exports = class Cart {
   static save(product) {
-    if (cart == null) {
+    if (cart === null) {
       cart = { products: [], totalPrice: 0 };
     }
     const exisitingProductIndex = cart.products.findIndex(
@@ -22,5 +22,13 @@ module.exports = class Cart {
   }
   static getCart() {
     return cart;
+  }
+  static delete(id){
+    const isExisting=cart.products.findIndex(e=>e.id==id);
+    if(isExisting>=0){
+      const delProduct=cart.products[isExisting];
+      cart.totalPrice-=delProduct.product_price * delProduct.qty;
+      cart.products.splice(isExisting,1)
+    }
   }
 };

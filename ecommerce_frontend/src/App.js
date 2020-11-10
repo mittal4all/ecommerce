@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -44,7 +44,7 @@ function App() {
       <Route path="/create" exact component={CreateOrder} />
       <Route path="/check" exact component={SeeOrders} />
       <Route path="/about" exact component={AboutPage} />
-      <Route path="/addtocart/:id" component={AddtoCart} />
+      <Route path="/cart" component={AddtoCart} />
     </Router>
   );
 }

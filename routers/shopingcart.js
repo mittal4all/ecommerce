@@ -22,13 +22,18 @@ router.post("/addtocart/:id",async(req,res)=>{
         },
       })
       Cart.save(user[0].dataValues);
-      res.json(Cart.getCart());
+      res.json("added successfully");
 }); 
 
-// router.get("/getCart",(req,res)=>{
-//   const newCart=Cart.getCart();
-//   console.log("asas",newCart);
-// })
+router.delete("/deleteCart/:id",async(req,res)=>{
+  Cart.delete(req.params.id);
+  res.json(Cart.getCart());
+})
+
+router.get("/getCart",(req,res)=>{
+  const newCart=Cart.getCart();
+  res.json(newCart);
+})
 
 router.post("/adddata", (req, res) => {
   //console.log(req.body);

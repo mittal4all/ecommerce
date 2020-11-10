@@ -17,6 +17,10 @@ const Header = () => {
         Checkorder
       </NavLink>
       {" | "}
+      <NavLink to="/cart" activeStyle={activeStyle} exact>
+      see Cart
+    </NavLink>
+      {" | "}
       <NavLink to="/about" activeStyle={activeStyle} exact>
         About
       </NavLink>
