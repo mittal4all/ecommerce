@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import FormPage from "./FormPage";
 import axios from "axios";
+import {useDispatch} from "react-redux"
+import { addDATA } from "../redux/actions/orderAction";
 function CreateOrder() {
+  const dispatch=useDispatch();
   const [product_name, setProductName] = useState("");
   const [product_price, setProductPrice] = useState("");
   const [product_description, setDes] = useState("");
@@ -13,10 +16,10 @@ function CreateOrder() {
     data.append("product_price", product_price);
     data.append("product_description", product_description);
     data.append("product_image", product_image);
-    axios
-      .post("http://localhost:5000/adddata", data)
-      .then((res) => console.log(res.data));
-
+    // axios
+    //   .post("http://localhost:5000/adddata", data)
+    //   .then((res) => console.log(res.data));
+    dispatch(addDATA(data));
     setProductName("");
     setProductPrice("");
     setDes("");

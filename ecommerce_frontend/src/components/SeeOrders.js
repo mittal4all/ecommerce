@@ -12,12 +12,23 @@ import {
 import { toast } from "react-toastify";
 import Header from "./Header";
 import axios from "axios";
+import {useSelector,useDispatch} from "react-redux"
+import { seeDATA } from "../redux/actions/orderAction";
+
 function Seeorders() {
-  const [orders, ordersArr] = useState([]);
+  // const orders=useSelector((state)=>{
+  //   return console.log(state);
+  // });
+  const orders=useSelector(state=>state.orderReducer.orders)
+  console.log("@@@@@@@@",orders)
+  const dispatch=useDispatch();
+  //const [orders, ordersArr] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:5000/getData");
-      ordersArr(result.data);
+      if(orders.length===0){
+        console.log(orders.length);
+      dispatch(seeDATA());
+      }
     };
     fetchData();
   }, []);

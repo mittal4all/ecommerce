@@ -12,6 +12,8 @@ import AboutPage from "./components/AboutPage";
 import SeeOrders from "./components/SeeOrders";
 import CreateOrder from "./components/CreateOrder";
 import AddtoCart from "./components/AddtoCart";
+import {Provider} from "react-redux"
+import store from "./redux/store";
 
 toast.configure();
 
@@ -36,6 +38,7 @@ function App() {
     forAuth()
 },[])
   return (
+    <Provider store={store}>
     <Router>
       <Route path="/" exact component={Home}/>
       <Route path="/login" exact render={props=> !isAuth?(<Login {...props} auth={auth}/>):(<Redirect to="/dashboard" />)}/>
@@ -46,6 +49,7 @@ function App() {
       <Route path="/about" exact component={AboutPage} />
       <Route path="/cart" component={AddtoCart} />
     </Router>
+    </Provider>
   );
 }
 

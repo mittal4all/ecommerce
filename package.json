@@ -19,6 +19,8 @@
     "nodemon": "^2.0.6",
     "pg": "^8.4.2",
     "pg-hstore": "^2.3.3",
+    "react": "^17.0.1",
+    "react-redux": "^7.2.2",
     "sequelize": "^6.3.5"
   }
 }
